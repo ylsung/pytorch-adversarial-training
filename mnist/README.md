@@ -10,9 +10,9 @@
 			<td width="27%" align="center"> <strong>l2 Training</strong></td>
 		</tr>
 <tr>
-			<td width="27%" align="center"> <img src="/img/mnist_learning_curve_std.jpg?raw=true"> </td>
-			<td width="27%" align="center"> <img src="/img/mnist_learning_curve_linf.jpg?raw=true"> </td>
-			<td width="27%" align="center"> <img src="/img/mnist_learning_curve_l2.jpg?raw=true"> </td>
+			<td width="27%" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_std.jpg"> </td>
+			<td width="27%" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_linf.jpg"> </td>
+			<td width="27%" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_l2.jpg"> </td>
 		</tr>
 	</tbody>
 </table>
