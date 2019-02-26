@@ -2,7 +2,7 @@
 
 ## Learning Curves
 
-
+<!-- 
 <table border=0 width="50px" >
 	<tbody> 
     <tr>		<td width="27%" align="center"> </td>
@@ -44,7 +44,7 @@ All images are pre-processed with mean and std of the ImageNet dataset before be
 I tried to comment on the code as much as possible, if you have any issues understanding it or porting it, don't hesitate to send an email or create an issue.
 
 Below, are some sample results for each operation.
-
+ -->
 
 ## Requirements:
 ```
