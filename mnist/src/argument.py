@@ -7,9 +7,9 @@ def parser():
     parser.add_argument('--dataset', default='mnist', help='use what dataset')
     parser.add_argument('--data_root', default='/home/yilin/Data', 
         help='the directory to save the dataset')
-    parser.add_argument('--log_root', default='../log', 
+    parser.add_argument('--log_root', default='log', 
         help='the directory to save the logs or other imformations (e.g. images)')
-    parser.add_argument('--model_root', default='../checkpoint', help='the directory to save the models')
+    parser.add_argument('--model_root', default='checkpoint', help='the directory to save the models')
     parser.add_argument('--load_checkpoint', default='./model/default/model.pth')
     parser.add_argument('--affix', default='', help='the affix for the save folder')
 
