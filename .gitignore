@@ -1,6 +1,6 @@
 __pycache__/
 log/
-img/
+
 # Compiled source #
 ###################
 *.com
@@ -10,4 +10,4 @@ img/
 *.o
 *.so
 sftp-config.json
-
+read_log.py
