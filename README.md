@@ -47,3 +47,7 @@ Part of the codes in this repo are borrowed/modified from [2], [3], [4] and [5].
 [5] https://github.com/utkuozbulak/pytorch-cnn-visualizations
 
 
+## Contact 
+Yi-Lin Sung, corumlouis123@gmail.com
+
+

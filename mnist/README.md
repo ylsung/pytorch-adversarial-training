@@ -1,13 +1,17 @@
 # Adversarial Training and Visualization on MNIST
 
-## Learning Curves
 
+## Results
+
+### Learning Curves
+
+Epsilons in linf (l2) training is 0.3 (1.5). 
 
 <table border=0 width="50px" >
 	<tbody> 
     <tr>		<td width="27%" align="center"> <strong>Standard Training</strong> </td>
-			<td width="27%" align="center"> <strong>linf Training</strong> </td>
-			<td width="27%" align="center"> <strong>l2 Training</strong></td>
+			<td width="27%" align="center"> <strong>l_inf Training</strong> </td>
+			<td width="27%" align="center"> <strong>l_2 Training</strong></td>
 		</tr>
 <tr>
 			<td width="27%" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_std.jpg"> </td>
@@ -18,20 +22,66 @@
 </table>
 
 
+### Visualization of Gradient with Respect to Input
+
+![visualization](https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_grad_default.jpg)
+
+### The Adversarial Example with large epsilon
+
+The maximum epsilon is set to 4 (l2 norm) in this part.
+
+![large](https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_large_l2_.jpg)
 
 
 ## Requirements:
 ```
-torch >= 0.4.0
-torchvision >= 0.1.9
-numpy >= 1.13.0
-matplotlib >= 1.5
-PIL >= 1.1.7
+python >= 3.5
+torch == 1.0
+torchvision == 0.2.1
+numpy >= 1.16.1
+matplotlib >= 3.0.2
+```
+
+## Execution
+
+### Training
+
+Standard training: <br/>
+
+```
+python main.py --data_root [data directory]
+```
+
+linf training: <br/>
+
+```
+python main.py --data_root [data directory] -e 0.3 -p 'linf' --adv_train
+```
+
+l2 training: <br/>
+
+```
+python main.py --data_root [data directory] -e 1.5 -p 'l2' --adv_train
+```
+
+### Visualization
+
+visualize gradient to input: <br/>
+
+```
+python visualize.py --load_checkpoint [your_model.pth]
+```
+
+visualize adversarial examples with larger epsilon <br/>
+
+```
+python visualize_attack.py --load_checkpoint [your_model.pth]
 ```
 
 
-## References:
+## Training Time
 
-[1] J. T. Springenberg, A. Dosovitskiy, T. Brox, and M. Riedmiller. *Striving for Simplicity: The All Convolutional Net*, https://arxiv.org/abs/1412.6806
+Standard training: 0.64 s / 100 iterations <br/>
+Adversarial training: 16 s / 100 iterations <br/> <br/>
 
-
+where the batch size is 64 and train on NVIDIA GeForce GTX 1080.
