@@ -28,7 +28,7 @@ The objective of standard and adversarial training is fundamentally different. I
 
 ## Visualization
 
-In [1], the authors discover that the features learned by the robustness classifier are more human-perceivable. Related results are shown in mnist/cifar folder.
+In [1], the authors discover that the features learned by the robustness classifier are more human-perceivable. Related results are shown in mnist/cifar-10 folder.
 
 ## Implementation
 
