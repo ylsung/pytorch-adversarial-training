@@ -1,6 +1,6 @@
 # Adversarial Training and Visualization
 
-The repo is the pytorch-1.0 implementation for the adversarial training on MNIST/CIFAR-10. And I also reproduce part of the visualization results in [1]. <br/><br/>
+The repo is the PyTorch-1.0 implementation for the adversarial training on MNIST/CIFAR-10. And I also reproduce part of the visualization results in [1]. <br/><br/>
 
 **Note**: Not an official implementation.
 
@@ -49,5 +49,3 @@ Part of the codes in this repo are borrowed/modified from [2], [3], [4] and [5].
 
 ## Contact 
 Yi-Lin Sung, corumlouis123@gmail.com
-
-
