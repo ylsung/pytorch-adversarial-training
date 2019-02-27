@@ -9,18 +9,36 @@ Epsilons in linf (l2) training is 0.3 (1.5).
 
 <table border=0 width="50px" >
 	<tbody> 
-    <tr>		<td width="27%" align="center"> <strong>Standard Training</strong> </td>
-			<td width="27%" align="center"> <strong>l_inf Training</strong> </td>
-			<td width="27%" align="center"> <strong>l_2 Training</strong></td>
-		</tr>
-<tr>
-			<td width="27%" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_std.jpg"> </td>
-			<td width="27%" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_linf.jpg"> </td>
-			<td width="27%" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_l2.jpg"> </td>
-		</tr>
+    <tr>	
+    	<th colspan="2" align="center"> <strong>Standard Training</strong> </th>
+		<th colspan="2" align="center"> <strong>l_inf Training</strong> </th>
+		<th colspan="2" align="center"> <strong>l_2 Training</strong></th>
+	</tr>
+	<tr>
+		<th colspan="2" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_std.jpg"> </th>
+		<th colspan="2" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_linf.jpg"> </th>
+		<th colspan="2" align="center"> <img src="https://github.com/louis2889184/adversarial_training/blob/master/mnist/img/mnist_learning_curve_l2.jpg"> </th>
+	</tr>
+	<tr>
+		<th colspan="1" align="center"> <strong>Standard Accuracy</strong> <br/> (train/test) </th>
+		<th colspan="1" align="center"> <strong>Robustness Accuracy</strong> <br/> (train/test) </th>
+		<th colspan="1" align="center"> <strong>Standard Accuracy</strong> <br/> (train/test) </th>
+		<th colspan="1" align="center"> <strong>Robustness Accuracy</strong> <br/> (train/test) </th>
+		<th colspan="1" align="center"> <strong>Standard Accuracy</strong> <br/> (train/test) </th>
+		<th colspan="1" align="center"> <strong>Robustness Accuracy</strong> <br/> (train/test) </th>
+	</tr>
+	<tr>
+		<th colspan="1" align="center"> 100.00/99.32 </th>
+		<th colspan="1" align="center"> 0.00/0.61 </th>
+		<th colspan="1" align="center"> 100.00/98.96 </th>
+		<th colspan="1" align="center"> 96.88/95.16 </th>
+		<th colspan="1" align="center"> 100.00/99.41 </th>
+		<th colspan="1" align="center"> 100.00/97.48 </th>
+	</tr>
 	</tbody>
 </table>
 
+Note that in testing mode, the target label used in creating the adversarial example is the most confident prediction of the model, not the ground truth. Therefore, sometimes the testing robustness is higher than training robustness, when the prediction is wrong at first.
 
 ### Visualization of Gradient with Respect to Input
 
