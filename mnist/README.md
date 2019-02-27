@@ -5,7 +5,7 @@
 
 ### Learning Curves
 
-Epsilons in linf (l2) training is 0.3 (1.5). 
+Epsilon in linf (l2) training is 0.3 (1.5). 
 
 <table border=0 width="50px" >
 	<tbody> 
