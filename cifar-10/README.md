@@ -3,7 +3,7 @@
 
 ## Update
 
-* Change the default alpha from 2 to 2/255, and update the results.
+* (2019/4/18) Change the default alpha from 2 to 2/255, and update the results.
 
 ## Results
 
