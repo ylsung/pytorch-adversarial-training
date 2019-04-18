@@ -16,8 +16,8 @@ def parser():
     # parameters for generating adversarial examples
     parser.add_argument('--epsilon', '-e', type=float, default=0.0157, 
         help='maximum perturbation of adversaries (4/255=0.0157)')
-    parser.add_argument('--alpha', '-a', type=float, default=2, 
-        help='movement multiplier per iteration when generating adversarial examples')
+    parser.add_argument('--alpha', '-a', type=float, default=0.00784, 
+        help='movement multiplier per iteration when generating adversarial examples (2/255=0.00784)')
     parser.add_argument('--k', '-k', type=int, default=10, 
         help='maximum iteration when generating adversarial examples')
 

@@ -1,6 +1,10 @@
 # Adversarial Training and Visualization on CIFAR-10
 
 
+## Update
+
+* Change the default alpha from 2 to 2/255, and update the results.
+
 ## Results
 
 ### Learning Curves
@@ -28,12 +32,12 @@ Epsilon in linf (l2) training is 0.0157 (0.314). [0.0157=4/255, 0.314=80/255]
         <th colspan="1" align="center"> <strong>Robustness Accuracy</strong> <br/> (train/test) </th>
     </tr>
     <tr>
-        <th colspan="1" align="center"> 92.19/86.67 </th>
-        <th colspan="1" align="center"> 7.03/12.05 </th>
-        <th colspan="1" align="center"> 81.25/79.65 </th>
-        <th colspan="1" align="center"> 57.03/64.44 </th>
-        <th colspan="1" align="center"> 88.28/85.44 </th>
-        <th colspan="1" align="center"> 74.22/77.61 </th>
+        <th colspan="1" align="center"> 92.19/87.14 </th>
+        <th colspan="1" align="center"> 0.00/7.85 </th>
+        <th colspan="1" align="center"> 79.69/78.09 </th>
+        <th colspan="1" align="center"> 61.72/63.8 </th>
+        <th colspan="1" align="center"> 89.84/85.39 </th>
+        <th colspan="1" align="center"> 76.56/77.76 </th>
     </tr>
     </tbody>
 </table>
