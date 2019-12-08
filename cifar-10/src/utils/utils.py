@@ -101,3 +101,7 @@ def load_model(model, file_name):
 def save_model(model, file_name):
     torch.save(model.state_dict(), file_name)
 
+def count_parameters(model):
+    # copy from https://discuss.pytorch.org/t/how-do-i-check-the-number-of-parameters-of-a-model/4325/8
+    # baldassarre.fe's reply
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)

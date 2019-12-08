@@ -6,6 +6,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from src.utils import count_parameters
+
 class Expression(nn.Module):
     def __init__(self, func):
         super(Expression, self).__init__()
@@ -153,5 +155,7 @@ if __name__ == '__main__':
 
     n = WideResNet(depth=34, num_classes=10, widen_factor=10, dropRate=0.0)
 
-    print(n(i).size())
+    # print(n(i).size())
+
+    print(count_parameters(n))
 
