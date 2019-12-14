@@ -66,7 +66,7 @@ Epsilon in linf (l2) training is 0.0157 (0.314). [0.0157=4/255, 0.314=80/255]
     </tbody>
 </table>
 
-Note that in testing mode, the target label used in creating the adversarial example is the most confident prediction of the model, not the ground truth. Therefore, sometimes the testing robustness is higher than training robustness, when the prediction is wrong at first. <br/>
+(Only refer to those results which are not Madry's Model) Note that in testing mode, the target label used in creating the adversarial example is the most confident prediction of the model, not the ground truth. Therefore, sometimes the testing robustness is higher than training robustness, when the prediction is wrong at first. <br/>
 
 Learning rate is manually changed during training: <br/>
 
