@@ -9,7 +9,7 @@ sys.path.append("..")
 
 import torch
 
-from utils import tensor2cuda, one_hot
+from src.utils import tensor2cuda, one_hot
 
 class VanillaBackprop():
     """

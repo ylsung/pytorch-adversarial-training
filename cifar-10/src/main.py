@@ -7,11 +7,11 @@ from torch.utils.data import DataLoader
 import torchvision as tv
 
 from time import time
-from model import WideResNet
-from attack import FastGradientSignUntargeted
-from utils import makedirs, create_logger, tensor2cuda, numpy2cuda, evaluate, save_model
+from src.model.madry_model import WideResNet
+from src.attack import FastGradientSignUntargeted
+from src.utils import makedirs, create_logger, tensor2cuda, numpy2cuda, evaluate, save_model
 
-from argument import parser, print_args
+from src.argument import parser, print_args
 
 class Trainer():
     def __init__(self, args, logger, attack):
@@ -123,7 +123,7 @@ class Trainer():
 
             if va_loader is not None:
                 t1 = time()
-                va_acc, va_adv_acc = self.test(model, va_loader, True)
+                va_acc, va_adv_acc = self.test(model, va_loader, True, False)
                 va_acc, va_adv_acc = va_acc * 100.0, va_adv_acc * 100.0
 
                 t2 = time()
@@ -134,7 +134,7 @@ class Trainer():
                 logger.info('='*28+' end of evaluation '+'='*28+'\n')
 
 
-    def test(self, model, loader, adv_test=False):
+    def test(self, model, loader, adv_test=False, use_pseudo_label=False):
         # adv_test is False, return adv_acc as -1 
 
         total_acc = 0.0
@@ -156,7 +156,10 @@ class Trainer():
                 if adv_test:
                     # use predicted label as target label
                     with torch.enable_grad():
-                        adv_data = self.attack.perturb(data, pred, 'mean', False)
+                        adv_data = self.attack.perturb(data, 
+                                                       pred if use_pseudo_label else label, 
+                                                       'mean', 
+                                                       False)
 
                     adv_output = model(adv_data, _eval=True)
 
@@ -227,7 +230,20 @@ def main(args):
 
         trainer.train(model, tr_loader, te_loader, args.adv_train)
     elif args.todo == 'test':
-        pass
+        te_dataset = tv.datasets.CIFAR10(args.data_root, 
+                                       train=False, 
+                                       transform=tv.transforms.ToTensor(), 
+                                       download=True)
+
+        te_loader = DataLoader(te_dataset, batch_size=args.batch_size, shuffle=False, num_workers=4)
+
+        checkpoint = torch.load(args.load_checkpoint)
+        model.load_state_dict(checkpoint)
+
+        std_acc, adv_acc = trainer.test(model, te_loader, adv_test=True, use_pseudo_label=False)
+
+        print("std acc: %.4f, adv_acc: %.4f" % (std_acc * 100, adv_acc * 100))
+
     else:
         raise NotImplementedError
     

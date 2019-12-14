@@ -6,11 +6,11 @@ import numpy as np
 
 from torch.utils.data import DataLoader
 
-from utils import makedirs, tensor2cuda, load_model, LabelDict
+from src.utils import makedirs, tensor2cuda, load_model, LabelDict
 from argument import parser
-from visualization import VanillaBackprop
-from attack import FastGradientSignUntargeted
-from model import WideResNet
+from src.visualization import VanillaBackprop
+from src.attack import FastGradientSignUntargeted
+from src.model.madry_model import WideResNet
 
 import matplotlib.pyplot as plt 
 
