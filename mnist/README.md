@@ -67,33 +67,42 @@ matplotlib >= 3.0.2
 Standard training: <br/>
 
 ```
-python src/main.py --data_root [data directory]
+python main.py --data_root [data directory]
 ```
 
 linf training: <br/>
 
 ```
-python src/main.py --data_root [data directory] -e 0.3 -p 'linf' --adv_train
+python main.py --data_root [data directory] -e 0.3 -p 'linf' --adv_train
 ```
 
 l2 training: <br/>
 
 ```
-python src/main.py --data_root [data directory] -e 1.5 -p 'l2' --adv_train
+python main.py --data_root [data directory] -e 1.5 -p 'l2' --adv_train
+```
+
+### Testing
+
+change the setting if you want to do linf testing.
+```
+python main.py --todo test --data_root [data directory] -e 0.314 -p 'l2' --load_checkpoint [your_model.pth]
 ```
 
 ### Visualization
 
+change the setting in `visualize.py` `visualize_attack.py` and if you want to do linf visualization.
+
 visualize gradient to input: <br/>
 
 ```
-python src/visualize.py --load_checkpoint [your_model.pth]
+python visualize.py --load_checkpoint [your_model.pth]
 ```
 
 visualize adversarial examples with larger epsilon <br/>
 
 ```
-python src/visualize_attack.py --load_checkpoint [your_model.pth]
+python visualize_attack.py --load_checkpoint [your_model.pth]
 ```
 
 

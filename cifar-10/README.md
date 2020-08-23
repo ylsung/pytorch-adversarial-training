@@ -103,42 +103,42 @@ matplotlib >= 3.0.2
 Standard training: <br/>
 
 ```
-python -m src.main.py --data_root [data directory]
+python main.py --data_root [data directory]
 ```
 
 linf training: <br/>
 
 ```
-python -m src.main.py --data_root [data directory] -e 0.0157 -p 'linf' --adv_train --affix 'linf'
+python main.py --data_root [data directory] -e 0.0157 -p 'linf' --adv_train --affix 'linf'
 ```
 
 l2 training: <br/>
 
 ```
-python -m src.main.py --data_root [data directory] -e 0.314 -p 'l2' --adv_train --affix 'l2'
+python main.py --data_root [data directory] -e 0.314 -p 'l2' --adv_train --affix 'l2'
 ```
 
 ### Testing
 
 change the setting if you want to do linf testing.
 ```
-python -m src.main --todo test --data_root [data directory] -e 0.314 -p 'l2' --load_checkpoint [your_model.pth]
+python main.py --todo test --data_root [data directory] -e 0.314 -p 'l2' --load_checkpoint [your_model.pth]
 ```
 
 ### Visualization
 
-change the setting in `src/visualize.py` `src/visualize_attack.py` and if you want to do linf visualization.
+change the setting in `visualize.py` `visualize_attack.py` and if you want to do linf visualization.
 
 visualize gradient to input: <br/>
 
 ```
-python -m src.visualize.py --load_checkpoint [your_model.pth]
+python visualize.py --load_checkpoint [your_model.pth]
 ```
 
 visualize adversarial examples with larger epsilon <br/>
 
 ```
-python -m src.visualize_attack.py --load_checkpoint [your_model.pth]
+python visualize_attack.py --load_checkpoint [your_model.pth]
 ```
 
 ## Checkpoints
