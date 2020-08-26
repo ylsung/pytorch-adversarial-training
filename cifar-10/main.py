@@ -29,16 +29,17 @@ class Trainer():
         args = self.args
         logger = self.logger
 
-        opt = torch.optim.Adam(model.parameters(), args.learning_rate, weight_decay=args.weight_decay)
+        opt = torch.optim.SGD(model.parameters(), args.learning_rate, 
+                              weight_decay=args.weight_decay,
+                              momentum=args.momentum)
         scheduler = torch.optim.lr_scheduler.MultiStepLR(opt, 
-                                                         milestones=[100, 150], 
+                                                         milestones=[40000, 60000], 
                                                          gamma=0.1)
         _iter = 0
 
         begin_time = time()
 
         for epoch in range(1, args.max_epoch+1):
-            scheduler.step()
             for data, label in tr_loader:
                 data, label = tensor2cuda(data), tensor2cuda(label)
 
@@ -89,13 +90,10 @@ class Trainer():
 
                     t2 = time()
 
-                    print('%.3f' % (t2 - t1))
+                    logger.info(f'epoch: {epoch}, iter: {_iter}, lr={opt.param_groups[0]["lr"]}, '
+                                f'spent {time()-begin_time:.2f} s, tr_loss: {loss.item():.3f}')
 
-                    logger.info('epoch: %d, iter: %d, spent %.2f s, tr_loss: %.3f' % (
-                        epoch, _iter, time()-begin_time, loss.item()))
-
-                    logger.info('standard acc: %.3f %%, robustness acc: %.3f %%' % (
-                        std_acc, adv_acc))
+                    logger.info(f'standard acc: {std_acc:.3f}%, robustness acc: {adv_acc:.3f}%')
 
                     # begin_time = time()
 
@@ -112,14 +110,16 @@ class Trainer():
 
                 if _iter % args.n_store_image_step == 0:
                     tv.utils.save_image(torch.cat([data.cpu(), adv_data.cpu()], dim=0), 
-                                        os.path.join(args.log_folder, 'images_%d.jpg' % _iter), 
+                                        os.path.join(args.log_folder, f'images_{_iter}.jpg'), 
                                         nrow=16)
 
                 if _iter % args.n_checkpoint_step == 0:
-                    file_name = os.path.join(args.model_folder, 'checkpoint_%d.pth' % _iter)
+                    file_name = os.path.join(args.model_folder, f'checkpoint_{_iter}.pth')
                     save_model(model, file_name)
 
                 _iter += 1
+                # scheduler depends on training interation
+                scheduler.step()
 
             if va_loader is not None:
                 t1 = time()
@@ -127,10 +127,9 @@ class Trainer():
                 va_acc, va_adv_acc = va_acc * 100.0, va_adv_acc * 100.0
 
                 t2 = time()
-                logger.info('\n'+'='*20 +' evaluation at epoch: %d iteration: %d '%(epoch, _iter) \
+                logger.info('\n'+'='*20 +f' evaluation at epoch: {epoch} iteration: {_iter} ' \
                     +'='*20)
-                logger.info('test acc: %.3f %%, test adv acc: %.3f %%, spent: %.3f' % (
-                    va_acc, va_adv_acc, t2-t1))
+                logger.info(f'test acc: {va_acc:.3f}%, test adv acc: {va_adv_acc:.3f}%, spent: {t2-t1:.3f} s')
                 logger.info('='*28+' end of evaluation '+'='*28+'\n')
 
 
@@ -205,11 +204,7 @@ def main(args):
 
     if args.todo == 'train':
         transform_train = tv.transforms.Compose([
-                tv.transforms.ToTensor(),
-                tv.transforms.Lambda(lambda x: F.pad(x.unsqueeze(0),
-                                    (4,4,4,4), mode='constant', value=0).squeeze()),
-                tv.transforms.ToPILImage(),
-                tv.transforms.RandomCrop(32),
+                tv.transforms.RandomCrop(32, padding=4, fill=0, padding_mode='constant'),
                 tv.transforms.RandomHorizontalFlip(),
                 tv.transforms.ToTensor(),
             ])
@@ -242,7 +237,7 @@ def main(args):
 
         std_acc, adv_acc = trainer.test(model, te_loader, adv_test=True, use_pseudo_label=False)
 
-        print("std acc: %.4f, adv_acc: %.4f" % (std_acc * 100, adv_acc * 100))
+        print(f"std acc: {std_acc * 100:.3f}%, adv_acc: {adv_acc * 100:.3f}%")
 
     else:
         raise NotImplementedError

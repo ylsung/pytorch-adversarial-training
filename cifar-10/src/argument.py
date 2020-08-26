@@ -24,7 +24,8 @@ def parser():
     parser.add_argument('--batch_size', '-b', type=int, default=128, help='batch size')
     parser.add_argument('--max_epoch', '-m_e', type=int, default=200, 
         help='the maximum numbers of the model see a sample')
-    parser.add_argument('--learning_rate', '-lr', type=float, default=1e-2, help='learning rate')
+    parser.add_argument('--learning_rate', '-lr', type=float, default=0.1, help='learning rate')
+    parser.add_argument('--momentum', '-m', type=float, default=0.9, help='momentum for optimizer')
     parser.add_argument('--weight_decay', '-w', type=float, default=2e-4, 
         help='the parameter of l2 restriction for weights')
 

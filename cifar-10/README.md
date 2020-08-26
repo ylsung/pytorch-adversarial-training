@@ -2,7 +2,11 @@
 
 
 ## Update
-
+* (2020/8/27)
+1. To match the implementation of [madry_cifar10](https://github.com/MadryLab/cifar10_challenge), we update the default learning rate to `0.1`, the activation function of model to `LeakyReLU(0.1)`, and the optimizer change to `torch.SGD`.
+2. Add new experiment in *Quantitative Results*, which match the results in [madry_cifar10](https://github.com/MadryLab/cifar10_challenge).
+3. Add checkpoints for the updated model and delete the old ones.
+4. Update codes structure. Pull `main.py`, `visualize.py` and `visualize_attack.py` out of `src` folder.
 * (2019/12/14) 
 1. Add `madry_model.py`, which contains the same model used in [madry_cifar10](https://github.com/MadryLab/cifar10_challenge), in `src/model`. 
 2. Add `count_parameters(model)` in `model.py` and `madry_model.py`, and it can compute the number of all the trainable parameters.
@@ -70,11 +74,21 @@ Epsilon in linf (l2) training is 0.0157 (0.314). [0.0157=4/255, 0.314=80/255]
 
 Learning rate is manually changed during training: <br/>
 
-* `0.1` in epoch `[0, 100]`
-* `0.01` in epoch `[100, 150]`
-* `0.001` in epoch `[150, 200]`
+* `0.1` in iteration `[0, 40000]`
+* `0.01` in iteration `[40000, 60000]`
+* `0.001` in iteration `[60000, 76000]`
 
 the policy is followed https://github.com/MadryLab/cifar10_challenge.
+
+
+### Quantitative Results
+
+* Defense model, standard accuracy = 86.66% (linf, epsilon=8/255) (train on PGD attack with 7 steps of size 2)
+
+|   Attack                                      | Robust Test Accuracy  |
+|   :---:                                       |  :---:                |
+|   PGD with 10 steps of size 2 (cross-entropy) |    48.37%             |
+|   PGD with 20 steps of size 1 (cross-entropy) |    48.04%             |
 
 ### Visualization of Gradient with Respect to Input
 
@@ -90,8 +104,8 @@ The maximum epsilon is set to 4.7 (l2 norm) in this part.
 ## Requirements:
 ```
 python >= 3.5
-torch == 1.0
-torchvision == 0.2.1
+torch >= 1.0
+torchvision >= 0.2.1
 numpy >= 1.16.1
 matplotlib >= 3.0.2
 ```
@@ -103,46 +117,47 @@ matplotlib >= 3.0.2
 Standard training: <br/>
 
 ```
-python -m src.main.py --data_root [data directory]
+python main.py --data_root [data directory]
 ```
 
 linf training: <br/>
 
 ```
-python -m src.main.py --data_root [data directory] -e 0.0157 -p 'linf' --adv_train --affix 'linf'
+python main.py --data_root [data directory] -e 0.0157 -p 'linf' --adv_train --affix 'linf'
 ```
 
 l2 training: <br/>
 
 ```
-python -m src.main.py --data_root [data directory] -e 0.314 -p 'l2' --adv_train --affix 'l2'
+python main.py --data_root [data directory] -e 0.314 -p 'l2' --adv_train --affix 'l2'
 ```
 
 ### Testing
 
 change the setting if you want to do linf testing.
 ```
-python -m src.main --todo test --data_root [data directory] -e 0.314 -p 'l2' --load_checkpoint [your_model.pth]
+python main.py --todo test --data_root [data directory] -e 0.314 -p 'l2' --load_checkpoint [your_model.pth]
 ```
 
 ### Visualization
 
-change the setting in `src/visualize.py` `src/visualize_attack.py` and if you want to do linf visualization.
+change the setting in `visualize.py` `visualize_attack.py` and if you want to do linf visualization.
 
 visualize gradient to input: <br/>
 
 ```
-python -m src.visualize.py --load_checkpoint [your_model.pth]
+python visualize.py --load_checkpoint [your_model.pth]
 ```
 
 visualize adversarial examples with larger epsilon <br/>
 
 ```
-python -m src.visualize_attack.py --load_checkpoint [your_model.pth]
+python visualize_attack.py --load_checkpoint [your_model.pth]
 ```
 
 ## Checkpoints
-[checkpoints](https://drive.google.com/open?id=1IFwkdEDoJqMEYzysgnkl64Dax4MeyglU)
+### linf
+* epsilon=8/255, train on PGD attack with 7 steps of size 2: [checkpoint](https://drive.google.com/file/d/1-3AfpkLvPje5poY9ZettY05N8kZgFRAV/view?usp=sharing) <br/>
 
 ## Training Time
 
