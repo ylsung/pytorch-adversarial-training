@@ -3,7 +3,7 @@
 
 ## Update
 * (2020/8/27)
-1. To match the implementation of [madry_cifar10](https://github.com/MadryLab/cifar10_challenge), we update the default learning rate to `0.1` and the activation function of model to `LeakyReLU(0.1)`.
+1. To match the implementation of [madry_cifar10](https://github.com/MadryLab/cifar10_challenge), we update the default learning rate to `0.1`, the activation function of model to `LeakyReLU(0.1)`, and the optimizer change to `torch.SGD`.
 2. Add new experiment in *Quantitative Results*, which match the results in [madry_cifar10](https://github.com/MadryLab/cifar10_challenge).
 3. Add checkpoints for the updated model and delete the old ones.
 4. Update codes structure. Pull `main.py`, `visualize.py` and `visualize_attack.py` out of `src` folder.
